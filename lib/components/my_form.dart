@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 class MyForm extends StatelessWidget {
   MyForm({super.key});
   final formKey = GlobalKey<FormState>();
+  final textController = TextEditingController();
+  final cpfController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Column(children: [
         TextFormField(
+          controller: textController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Digite algum texto!';
@@ -21,6 +25,7 @@ class MyForm extends StatelessWidget {
           },
         ),
         TextFormField(
+          controller: cpfController,
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'É necessário um CPF';
@@ -38,6 +43,8 @@ class MyForm extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Processando o Formulário!')),
               );
+              debugPrint(textController.text);
+              debugPrint(cpfController.text);
             }
           },
           child: const Text('Enviar'),
